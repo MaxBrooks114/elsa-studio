@@ -14,7 +14,6 @@ using Elsa.Studio.Workflows.Widgets;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
 
-
 namespace Elsa.Studio.Workflows.Extensions;
 
 /// <summary>
@@ -37,8 +36,7 @@ public static class ServiceCollectionExtensions
             .AddWorkflowsDesigner()
             .AddDomInterop()
             .AddClipboardInterop()
-            .AddDownloadInterop()
-            ;
+            .AddDownloadInterop();
 
         services
             .AddDiagramDesignerProvider<FallbackDesignerProvider>()

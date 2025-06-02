@@ -37,7 +37,10 @@ public static class ServiceCollectionExtensions
             .AddScoped<IStorageDriverService, RemoteStorageDriverService>()
             .AddScoped<IServerInformationProvider, RemoteServerInformationProvider>()
             .AddScoped<IVariableTypeService, RemoteVariableTypeService>()
-            .AddScoped<IWorkflowActivationStrategyService, RemoteWorkflowActivationStrategyService>()
+            .AddScoped<
+                IWorkflowActivationStrategyService,
+                RemoteWorkflowActivationStrategyService
+            >()
             .AddScoped<ILogPersistenceStrategyService, RemoteLogPersistenceStrategyService>()
             .AddScoped<IIncidentStrategiesProvider, RemoteIncidentStrategiesProvider>()
             .AddScoped<ICommitStrategiesProvider, RemoteCommitStrategiesProvider>()
@@ -46,37 +49,41 @@ public static class ServiceCollectionExtensions
             .AddScoped<IActivityPortService, DefaultActivityPortService>()
             .AddScoped<IActivityVisitor, DefaultActivityVisitor>()
             .AddScoped<IActivityResolver, DefaultActivityResolver>()
-            .AddScoped<IWorkflowJsonDetector, CompatWorkflowJsonDetector>()
-            ;
+            .AddScoped<IWorkflowJsonDetector, CompatWorkflowJsonDetector>();
 
         services.AddActivityDisplaySettingsProvider<DefaultActivityDisplaySettingsProvider>();
         services.AddActivityPortProvider<DefaultActivityPortProvider>();
-        
+
         return services;
     }
-    
+
     /// <summary>
     /// Adds a <see cref="IDiagramDesignerProvider"/> to the service collection.
     /// </summary>
-    public static IServiceCollection AddDiagramDesignerProvider<T>(this IServiceCollection services) where T : class, IDiagramDesignerProvider
+    public static IServiceCollection AddDiagramDesignerProvider<T>(this IServiceCollection services)
+        where T : class, IDiagramDesignerProvider
     {
         services.AddScoped<IDiagramDesignerProvider, T>();
         return services;
     }
-    
+
     /// <summary>
     /// Adds a <see cref="IActivityDisplaySettingsProvider"/> to the service collection.
     /// </summary>
-    public static IServiceCollection AddActivityDisplaySettingsProvider<T>(this IServiceCollection services) where T : class, IActivityDisplaySettingsProvider
+    public static IServiceCollection AddActivityDisplaySettingsProvider<T>(
+        this IServiceCollection services
+    )
+        where T : class, IActivityDisplaySettingsProvider
     {
         services.AddScoped<IActivityDisplaySettingsProvider, T>();
         return services;
     }
-    
+
     /// <summary>
     /// Adds a <see cref="IActivityPortProvider"/> to the service collection.
     /// </summary>
-    public static IServiceCollection AddActivityPortProvider<T>(this IServiceCollection services) where T : class, IActivityPortProvider
+    public static IServiceCollection AddActivityPortProvider<T>(this IServiceCollection services)
+        where T : class, IActivityPortProvider
     {
         services.AddScoped<IActivityPortProvider, T>();
         return services;
