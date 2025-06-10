@@ -14,7 +14,7 @@
 
     <!-- For NuGet browsers that currently don't support <PackageIcon> yet -->
     <PackageIconUrl>https://v3.elsaworkflows.io/nuget-icon.png</PackageIconUrl>
-
+	 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AnalysisModeDocumentation>Default</AnalysisModeDocumentation>
     <AnalysisLevelDocumentation>latest</AnalysisLevelDocumentation>

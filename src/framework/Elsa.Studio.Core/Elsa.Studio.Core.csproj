@@ -30,7 +30,7 @@
 <!--    </ItemGroup>-->
 
     <ItemGroup Label="Elsa">
-        <PackageReference Include="Elsa.Api.Client"/>
+		<ProjectReference Include="D:\repos\elsa-core-main\src\clients\Elsa.Api.Client\Elsa.Api.Client.csproj" />
     </ItemGroup>
 
 
