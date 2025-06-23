@@ -8,14 +8,16 @@ using Elsa.Studio.Extensions;
 using Elsa.Studio.Workflows.Designer.Contracts;
 using Elsa.Studio.Workflows.Designer.Interop;
 using Elsa.Studio.Workflows.Designer.Models;
+using Elsa.Studio.Workflows.Designer.Options;
 using Elsa.Studio.Workflows.Designer.Services;
 using Elsa.Studio.Workflows.Domain.Contracts;
+using Elsa.Studio.Workflows.Domain.Models;
 using Elsa.Studio.Workflows.Extensions;
 using Elsa.Studio.Workflows.UI.Args;
-using Elsa.Studio.Workflows.UI.Models;
 using Humanizer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using MudBlazor.Utilities;
 using ThrottleDebounce;
@@ -29,11 +31,11 @@ public partial class FlowchartDesigner : IDisposable, IAsyncDisposable
 {
     private readonly string _containerId = $"container-{Guid.NewGuid():N}";
     private DotNetObjectReference<FlowchartDesigner>? _componentRef;
-    private IFlowchartMapper? _flowchartMapper = null!;
-    private IActivityMapper? _activityMapper = null!;
+    private IFlowchartMapper? _flowchartMapper;
+    private IActivityMapper? _activityMapper;
     private X6GraphApi _graphApi = null!;
     private readonly PendingActionsQueue _pendingGraphActions;
-    private RateLimitedFunc<Task> _rateLimitedLoadFlowchartAction;
+    private readonly RateLimitedFunc<Task> _rateLimitedLoadFlowchartAction;
     private IDictionary<string, ActivityStats>? _activityStats;
     private JsonObject? _flowchart;
     private bool _hasRunAutoLayout;
@@ -65,8 +67,9 @@ public partial class FlowchartDesigner : IDisposable, IAsyncDisposable
     public bool IsReadOnly { get; set; }
 
     /// An event raised when an activity is selected.
-    [Parameter]
-    public EventCallback<JsonObject> ActivitySelected { get; set; }
+    [Parameter] public EventCallback<JsonObject> ActivitySelected { get; set; }
+    
+    [Parameter] public EventCallback<JsonObject> ActivityPropsChanged { get; set; }
 
     /// An event raised when an activity-embedded port is selected.
     [Parameter]
@@ -84,8 +87,14 @@ public partial class FlowchartDesigner : IDisposable, IAsyncDisposable
     [Parameter]
     public EventCallback GraphUpdated { get; set; }
 
-    [Inject]
-    private DesignerJsInterop DesignerJsInterop { get; set; } = null!;
+    [Inject] private DesignerJsInterop DesignerJsInterop { get; set; } = null!;
+    [Inject] private IThemeService ThemeService { get; set; } = null!;
+    [Inject] private IActivityRegistry ActivityRegistry { get; set; } = null!;
+    [Inject] private IMapperFactory MapperFactory { get; set; } = null!;
+    [Inject] private IIdentityGenerator IdentityGenerator { get; set; } = null!;
+    [Inject] private IActivityNameGenerator ActivityNameGenerator { get; set; } = null!;
+    [Inject] private IOptions<DesignerOptions> Options { get; set; } = null!;
+    [Inject] private ILogger<FlowchartDesigner> Logger { get; set; } = null!;
 
     [Inject]
     private IThemeService ThemeService { get; set; } = null!;
@@ -114,6 +123,12 @@ public partial class FlowchartDesigner : IDisposable, IAsyncDisposable
     {
         if (ActivitySelected.HasDelegate)
             await ActivitySelected.InvokeAsync(activity);
+    }
+
+    public async Task UpdateActivityAsync(JsonObject activity)
+    {
+        if (ActivityPropsChanged.HasDelegate)
+            await ActivityPropsChanged.InvokeAsync(activity);
     }
 
     /// <summary>
@@ -505,7 +520,7 @@ public partial class FlowchartDesigner : IDisposable, IAsyncDisposable
 
     private bool AllNodesAtOrigin(JsonObject flowchart)
     {
-        var activities = flowchart.GetActivities(); // extension that pulls the “activities” array
+        var activities = flowchart.GetActivities(); // extension that pulls the �activities� array
         foreach (var activity in activities)
         {
             // drill into metadata.designer.position.{x,y}
@@ -525,7 +540,7 @@ public partial class FlowchartDesigner : IDisposable, IAsyncDisposable
             }
             else
             {
-                // no metadata or no position? treat that as “still at origin”
+                // no metadata or no position? treat that as �still at origin�
                 continue;
             }
         }
