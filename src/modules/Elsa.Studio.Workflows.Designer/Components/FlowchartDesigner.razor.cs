@@ -96,23 +96,7 @@ public partial class FlowchartDesigner : IDisposable, IAsyncDisposable
     [Inject] private IOptions<DesignerOptions> Options { get; set; } = null!;
     [Inject] private ILogger<FlowchartDesigner> Logger { get; set; } = null!;
 
-    [Inject]
-    private IThemeService ThemeService { get; set; } = null!;
 
-    [Inject]
-    private IActivityRegistry ActivityRegistry { get; set; } = null!;
-
-    [Inject]
-    private IMapperFactory MapperFactory { get; set; } = null!;
-
-    [Inject]
-    private IIdentityGenerator IdentityGenerator { get; set; } = null!;
-
-    [Inject]
-    private IActivityNameGenerator ActivityNameGenerator { get; set; } = null!;
-
-    [Inject]
-    private ILogger<FlowchartDesigner> Logger { get; set; } = null!;
 
     /// <summary>
     /// Invoked from JavaScript when an activity is selected.
