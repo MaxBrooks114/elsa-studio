@@ -6,21 +6,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <SupportedPlatform Include="browser"/>
+        <SupportedPlatform Include="browser" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot\"/>
+        <Folder Include="wwwroot\" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="D:\repos\elsa-studio-main\src\framework\Elsa.Studio.Core\Elsa.Studio.Core.csproj"/>
-        <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.Workflows.Core\Elsa.Studio.Workflows.Core.csproj"/>
+        <ProjectReference Include="D:\repos\elsa-studio-main\src\framework\Elsa.Studio.Core\Elsa.Studio.Core.csproj" />
+        <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.Workflows.Core\Elsa.Studio.Workflows.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <!-- Prevents build error on GH Actions -->
-        <Content Remove="ClientLib\package-lock.json;ClientLib\package.json;ClientLib\tsconfig.json"/>
+        <Content Remove="ClientLib\package-lock.json;ClientLib\package.json;ClientLib\tsconfig.json" />
         <!--                <None Include="ClientLib\package-lock.json;ClientLib\package.json;ClientLib\tsconfig.json">-->
         <!--                    <CopyToOutputDirectory>Never</CopyToOutputDirectory>-->
         <!--                    <CopyToPublishDirectory>Never</CopyToPublishDirectory>-->

@@ -11,7 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.Login.BlazorWasm\Elsa.Studio.Login.BlazorWasm.csproj" />
       <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.Login\Elsa.Studio.Login.csproj" />
     </ItemGroup>
 

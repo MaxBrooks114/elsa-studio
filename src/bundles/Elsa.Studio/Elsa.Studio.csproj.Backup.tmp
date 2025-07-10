@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Elsa Studio bundle of commonly used packages.</Description>
+        <PackageTags>elsa studio framework bundle</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="D:\repos\elsa-studio-main\src\framework\Elsa.Studio.Shell\Elsa.Studio.Shell.csproj" />
+        <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.Dashboard\Elsa.Studio.Dashboard.csproj" />
+        <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.Workflows\Elsa.Studio.Workflows.csproj" />
+    </ItemGroup>
+
+</Project>

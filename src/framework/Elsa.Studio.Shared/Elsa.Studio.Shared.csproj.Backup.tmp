@@ -16,8 +16,8 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="D:\repos\elsa-studio-main\src\framework\Elsa.Studio.Core\Elsa.Studio.Core.csproj" />
-      <ProjectReference Include="D:\repos\elsa-studio-main\src\framework\Elsa.Studio.DomInterop\Elsa.Studio.DomInterop.csproj" />
+      <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.Core\Elsa.Studio.Core.csproj" />
+      <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.DomInterop\Elsa.Studio.DomInterop.csproj" />
     </ItemGroup>
     
 </Project>

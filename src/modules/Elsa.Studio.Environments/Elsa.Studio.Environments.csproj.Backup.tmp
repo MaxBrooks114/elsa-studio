@@ -1,17 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <Description>Adds various UI hint handlers for activity input.</Description>
+        <Description>Adds support for connecting to different Elsa Workflows environments.</Description>
         <PackageTags>elsa studio module</PackageTags>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <SupportedPlatform Include="browser" />
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="D:\repos\elsa-studio-main\src\framework\Elsa.Studio.Shared\Elsa.Studio.Shared.csproj" />
-      <ProjectReference Include="D:\repos\elsa-studio-main\src\modules\Elsa.Studio.Workflows.Core\Elsa.Studio.Workflows.Core.csproj" />
+        <PackageReference Include="Refit" />
+        <PackageReference Include="Refit.HttpClientFactory" />
     </ItemGroup>
     
+    <ItemGroup>
+      <ProjectReference Include="D:\repos\elsa-studio-main\src\framework\Elsa.Studio.Core\Elsa.Studio.Core.csproj" />
+      <ProjectReference Include="D:\repos\elsa-studio-main\src\framework\Elsa.Studio.Shared\Elsa.Studio.Shared.csproj" />
+    </ItemGroup>
+
 </Project>
